@@ -4,6 +4,9 @@ from __future__ import annotations
 import json
 import os
 import time
+import matplotlib
+
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from sklearn.metrics import (
     accuracy_score, precision_score, recall_score, f1_score,
@@ -12,8 +15,15 @@ from sklearn.metrics import (
 )
 
 
-def evaluate_classifier(model, X_test, y_test, model_name: str, output_dir: str = "reports/figures"):
-    os.makedirs(output_dir, exist_ok=True)
+def evaluate_classifier(
+    model,
+    X_test,
+    y_test,
+    model_name: str,
+    output_dir: str = "reports/figures",
+    fit_time_seconds: float | None = None,
+    save_plot: bool = True,
+):
     predictions = model.predict(X_test)
     metrics = {
         "model": model_name,
@@ -21,7 +31,10 @@ def evaluate_classifier(model, X_test, y_test, model_name: str, output_dir: str 
         "precision": float(precision_score(y_test, predictions, zero_division=0)),
         "recall": float(recall_score(y_test, predictions, zero_division=0)),
         "f1": float(f1_score(y_test, predictions, zero_division=0)),
+        "confusion_matrix": confusion_matrix(y_test, predictions, labels=[0, 1]).tolist(),
     }
+    if fit_time_seconds is not None:
+        metrics["training_time_seconds"] = float(fit_time_seconds)
     if hasattr(model, "predict_proba"):
         scores = model.predict_proba(X_test)[:, 1]
         metrics["roc_auc"] = float(roc_auc_score(y_test, scores))
@@ -38,10 +51,18 @@ def evaluate_classifier(model, X_test, y_test, model_name: str, output_dir: str 
 
     print(json.dumps(metrics, indent=2, ensure_ascii=False))
     print("\nClassification report:\n", classification_report(y_test, predictions, target_names=["Legitimate", "Phishing"], zero_division=0))
-    disp = ConfusionMatrixDisplay(confusion_matrix(y_test, predictions), display_labels=["Legitimate", "Phishing"])
-    disp.plot(cmap="Blues", values_format="d")
-    plt.title(f"Confusion Matrix - {model_name}")
-    plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, f"{model_name.lower().replace(' ', '_')}_confusion_matrix.png"), dpi=160)
-    plt.close()
+    if save_plot:
+        os.makedirs(output_dir, exist_ok=True)
+        disp = ConfusionMatrixDisplay(
+            confusion_matrix(y_test, predictions, labels=[0, 1]),
+            display_labels=["Legitimate", "Phishing"],
+        )
+        disp.plot(cmap="Blues", values_format="d")
+        plt.title(f"Confusion Matrix - {model_name}")
+        plt.tight_layout()
+        plt.savefig(
+            os.path.join(output_dir, f"{model_name.lower().replace(' ', '_')}_confusion_matrix.png"),
+            dpi=160,
+        )
+        plt.close()
     return metrics

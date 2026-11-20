@@ -11,6 +11,8 @@ from collections import Counter
 from urllib.parse import urlsplit, parse_qsl
 
 import pandas as pd
+import numpy as np
+from sklearn.base import BaseEstimator, TransformerMixin
 
 FEATURE_COLUMNS = [
     "url_length", "hostname_length", "count_dots", "count_hyphens",
@@ -99,3 +101,18 @@ def extract_features_batch(urls) -> pd.DataFrame:
     """Convert an iterable of URLs to a DataFrame with stable column order."""
     rows = [extract_url_features(url) for url in urls]
     return pd.DataFrame(rows, columns=FEATURE_COLUMNS).fillna(0)
+
+
+class URLFeatureTransformer(BaseEstimator, TransformerMixin):
+    """Scikit-learn transformer from raw URL strings to the 24 URL features."""
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        if isinstance(X, str):
+            X = [X]
+        return extract_features_batch(X)
+
+    def get_feature_names_out(self, input_features=None):
+        return np.asarray(FEATURE_COLUMNS, dtype=object)

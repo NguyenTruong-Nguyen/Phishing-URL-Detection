@@ -1,0 +1,367 @@
+{
+  "dataset_rows": 235370,
+  "label_mapping": {
+    "0": "Legitimate",
+    "1": "Phishing"
+  },
+  "split": {
+    "outer_train_rows": 188212,
+    "outer_test_rows": 47158,
+    "fit_rows": 160009,
+    "validation_rows": 28203,
+    "outer_domain_overlap": 0,
+    "fit_validation_domain_overlap": 0,
+    "outer_url_overlap": 0,
+    "fit_validation_url_overlap": 0,
+    "train_domains": 140407,
+    "test_domains": 35102,
+    "fit_domains": 119345,
+    "validation_domains": 21062,
+    "random_state": 42,
+    "validation_random_state": 43
+  },
+  "baseline_model_v0_sha256": "099db72ddd27948460e69dc66b35d60f5d242a963893a66ec40d688ac439c8ea",
+  "tfidf_config": {
+    "analyzer": "char",
+    "ngram_range": [
+      3,
+      5
+    ],
+    "min_df": 2,
+    "max_features": 50000,
+    "sublinear_tf": true,
+    "dtype": "float32",
+    "lowercase": false
+  },
+  "hist_gradient_boosting_search": {
+    "hist_gradient_boosting_100": {
+      "config": {
+        "max_iter": 100,
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0
+      },
+      "validation_metrics": {
+        "model": "hist_gradient_boosting_100",
+        "accuracy": 0.9976243662021771,
+        "precision": 0.9996695307336417,
+        "recall": 0.9948203568198635,
+        "f1": 0.9972390489141633,
+        "confusion_matrix": [
+          [
+            16036,
+            4
+          ],
+          [
+            63,
+            12100
+          ]
+        ],
+        "training_time_seconds": 6.495286099998339,
+        "roc_auc": 0.9984043426745148,
+        "prediction_ms_per_url": 0.07538627805559674
+      }
+    },
+    "hist_gradient_boosting_200": {
+      "config": {
+        "max_iter": 200,
+        "learning_rate": 0.1,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0
+      },
+      "validation_metrics": {
+        "model": "hist_gradient_boosting_200",
+        "accuracy": 0.9975534517604511,
+        "precision": 0.999504377994383,
+        "recall": 0.9948203568198635,
+        "f1": 0.9971568667847872,
+        "confusion_matrix": [
+          [
+            16034,
+            6
+          ],
+          [
+            63,
+            12100
+          ]
+        ],
+        "training_time_seconds": 30.713253399997484,
+        "roc_auc": 0.998290308205479,
+        "prediction_ms_per_url": 0.08665456157139814
+      }
+    },
+    "hist_gradient_boosting_slow": {
+      "config": {
+        "max_iter": 200,
+        "learning_rate": 0.05,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 1.0
+      },
+      "validation_metrics": {
+        "model": "hist_gradient_boosting_slow",
+        "accuracy": 0.99765982342304,
+        "precision": 0.9997521275716764,
+        "recall": 0.9948203568198635,
+        "f1": 0.9972801450589301,
+        "confusion_matrix": [
+          [
+            16037,
+            3
+          ],
+          [
+            63,
+            12100
+          ]
+        ],
+        "training_time_seconds": 16.205955000001268,
+        "roc_auc": 0.9984308323985728,
+        "prediction_ms_per_url": 0.028291433535476834,
+        "selected_config_name": "hist_gradient_boosting_slow"
+      }
+    }
+  },
+  "validation_metrics": {
+    "logistic_regression": {
+      "model": "logistic_regression",
+      "accuracy": 0.9968797645640535,
+      "precision": 0.9999171979796307,
+      "recall": 0.9928471594179068,
+      "f1": 0.9963696369636964,
+      "confusion_matrix": [
+        [
+          16039,
+          1
+        ],
+        [
+          87,
+          12076
+        ]
+      ],
+      "training_time_seconds": 4.141895900000236,
+      "roc_auc": 0.998025613430864,
+      "prediction_ms_per_url": 0.02277022302600983
+    },
+    "random_forest": {
+      "model": "random_forest",
+      "accuracy": 0.9977307378647662,
+      "precision": 0.999587083987117,
+      "recall": 0.9951492230535229,
+      "f1": 0.997363216875412,
+      "confusion_matrix": [
+        [
+          16035,
+          5
+        ],
+        [
+          59,
+          12104
+        ]
+      ],
+      "training_time_seconds": 6.816975799996726,
+      "roc_auc": 0.9981167692460045,
+      "prediction_ms_per_url": 0.026308772116425665
+    },
+    "hist_gradient_boosting": {
+      "model": "hist_gradient_boosting_slow",
+      "accuracy": 0.99765982342304,
+      "precision": 0.9997521275716764,
+      "recall": 0.9948203568198635,
+      "f1": 0.9972801450589301,
+      "confusion_matrix": [
+        [
+          16037,
+          3
+        ],
+        [
+          63,
+          12100
+        ]
+      ],
+      "training_time_seconds": 16.205955000001268,
+      "roc_auc": 0.9984308323985728,
+      "prediction_ms_per_url": 0.028291433535476834,
+      "selected_config_name": "hist_gradient_boosting_slow"
+    },
+    "tfidf_logistic_regression": {
+      "model": "tfidf_logistic_regression",
+      "accuracy": 0.9952487324043542,
+      "precision": 1.0,
+      "recall": 0.9889829811724081,
+      "f1": 0.9944609788359788,
+      "confusion_matrix": [
+        [
+          16040,
+          0
+        ],
+        [
+          134,
+          12029
+        ]
+      ],
+      "training_time_seconds": 21.927142299999105,
+      "roc_auc": 0.9982058081385372,
+      "prediction_ms_per_url": 0.0685430734319099,
+      "tfidf_vocabulary_size": 50000,
+      "tfidf_config": {
+        "analyzer": "char",
+        "ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 2,
+        "max_features": 50000,
+        "sublinear_tf": true,
+        "dtype": "float32",
+        "lowercase": false
+      }
+    },
+    "tfidf_linear_svm": {
+      "model": "tfidf_linear_svm",
+      "accuracy": 0.9969152217849165,
+      "precision": 1.0,
+      "recall": 0.9928471594179068,
+      "f1": 0.9964107430174513,
+      "confusion_matrix": [
+        [
+          16040,
+          0
+        ],
+        [
+          87,
+          12076
+        ]
+      ],
+      "training_time_seconds": 19.217944699998043,
+      "roc_auc": 0.9988266046632166,
+      "prediction_ms_per_url": 0.06425216111754993,
+      "tfidf_vocabulary_size": 50000,
+      "tfidf_config": {
+        "analyzer": "char",
+        "ngram_range": [
+          3,
+          5
+        ],
+        "min_df": 2,
+        "max_features": 50000,
+        "sublinear_tf": true,
+        "dtype": "float32",
+        "lowercase": false
+      }
+    }
+  },
+  "selected_model": "random_forest",
+  "selected_config": "Existing Stage 3A artifact; unchanged.",
+  "final_test_metrics": {
+    "model": "random_forest_test (Stage 3A; reused)",
+    "accuracy": 0.9979430849484711,
+    "precision": 0.9995021160069704,
+    "recall": 0.9956849518896935,
+    "f1": 0.9975898824757125,
+    "confusion_matrix": [
+      [
+        26986,
+        10
+      ],
+      [
+        87,
+        20075
+      ]
+    ],
+    "training_time_seconds": 47.43890069999907,
+    "roc_auc": 0.998114968709006,
+    "prediction_ms_per_url": 0.09208596632597227,
+    "test_evaluation_reused": true
+  },
+  "selected_test_roc_auc": 0.998114968709006,
+  "false_negative_analysis": {
+    "selected_model": "random_forest",
+    "false_negatives": 87,
+    "phishing_test_samples": 20162,
+    "false_negative_rate": 0.0043150481103065175,
+    "false_negative_feature_medians": {
+      "url_length": 29.0,
+      "hostname_length": 21.0,
+      "count_dots": 2.0,
+      "count_hyphens": 0.0,
+      "count_underscores": 0.0,
+      "count_question_marks": 0.0,
+      "count_equal_signs": 0.0,
+      "count_at_signs": 0.0,
+      "count_ampersands": 0.0,
+      "count_percent_signs": 0.0,
+      "count_slashes": 2.0,
+      "count_digits": 0.0,
+      "digit_ratio": 0.0,
+      "special_char_count": 5.0,
+      "has_https": 1.0,
+      "is_ip_hostname": 0.0,
+      "has_www": 1.0,
+      "path_length": 0.0,
+      "path_segment_count": 0.0,
+      "query_length": 0.0,
+      "query_parameter_count": 0.0,
+      "subdomain_count": 1.0,
+      "tld_length": 3.0,
+      "character_entropy": 3.936180434129755
+    },
+    "all_phishing_test_feature_medians": {
+      "url_length": 37.0,
+      "hostname_length": 21.0,
+      "count_dots": 2.0,
+      "count_hyphens": 0.0,
+      "count_underscores": 0.0,
+      "count_question_marks": 0.0,
+      "count_equal_signs": 0.0,
+      "count_at_signs": 0.0,
+      "count_ampersands": 0.0,
+      "count_percent_signs": 0.0,
+      "count_slashes": 3.0,
+      "count_digits": 0.0,
+      "digit_ratio": 0.0,
+      "special_char_count": 6.0,
+      "has_https": 1.0,
+      "is_ip_hostname": 0.0,
+      "has_www": 0.0,
+      "path_length": 1.0,
+      "path_segment_count": 0.0,
+      "query_length": 0.0,
+      "query_parameter_count": 0.0,
+      "subdomain_count": 1.0,
+      "tld_length": 3.0,
+      "character_entropy": 4.060262039120377
+    }
+  },
+  "feature_importance_random_forest": {
+    "url_length": 0.019406064007158746,
+    "hostname_length": 0.014336191100584986,
+    "count_dots": 0.00919413289255924,
+    "count_hyphens": 0.0059047375564224664,
+    "count_underscores": 3.159678520145772e-05,
+    "count_question_marks": 2.9405660126881394e-05,
+    "count_equal_signs": 2.9824705853286777e-05,
+    "count_at_signs": 2.7385903799309254e-05,
+    "count_ampersands": 2.6218165974276997e-14,
+    "count_percent_signs": 1.449190472992668e-14,
+    "count_slashes": 0.12456007285220327,
+    "count_digits": 0.04716386703778242,
+    "digit_ratio": 0.04644566981243503,
+    "special_char_count": 0.03538024306415471,
+    "has_https": 0.4397840914060867,
+    "is_ip_hostname": 2.962889177990516e-07,
+    "has_www": 0.09783490127803503,
+    "path_length": 0.11481766065798724,
+    "path_segment_count": 0.010580010011045861,
+    "query_length": 0.00014410713590769532,
+    "query_parameter_count": 0.00016372065162847095,
+    "subdomain_count": 0.009978957648931757,
+    "tld_length": 0.010580452950422961,
+    "character_entropy": 0.013606610592713907
+  },
+  "library_versions": {
+    "python": "3.14.7",
+    "numpy": "2.5.5",
+    "pandas": "3.1.1",
+    "scikit_learn": "1.9.1",
+    "joblib": "1.6.0"
+  }
+}
