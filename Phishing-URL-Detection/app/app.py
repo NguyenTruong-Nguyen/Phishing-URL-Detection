@@ -7,13 +7,18 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import streamlit as st
 from src.predict import predict_url
 
+DEFAULT_MODEL_PATH = Path(__file__).resolve().parents[1] / "models" / "model_v0.joblib"
+
 st.set_page_config(page_title="Phishing URL Detection", page_icon="🛡️", layout="centered")
 st.title("🛡️ Phishing URL Detection")
 st.write("Nhập một URL để hệ thống phân loại dựa trên đặc trưng của chuỗi URL.")
 st.info("Ứng dụng không truy cập website, không tải nội dung trang và không kiểm tra URL bằng HTTP.")
 
 url = st.text_input("URL cần kiểm tra", placeholder="https://example.com/login")
-model_path = st.text_input("Đường dẫn model (để trống dùng model mặc định)", value="")
+model_path = st.text_input(
+    "Đường dẫn model (để trống dùng Random Forest mặc định)",
+    value=str(DEFAULT_MODEL_PATH),
+)
 
 if st.button("Phân tích URL", type="primary", use_container_width=True):
     if not url.strip():
@@ -31,5 +36,7 @@ if st.button("Phân tích URL", type="primary", use_container_width=True):
             st.caption("Kết quả chỉ mang tính hỗ trợ sàng lọc; không có mô hình nào bảo đảm phát hiện tất cả URL lừa đảo.")
         except FileNotFoundError as exc:
             st.error(str(exc))
+        except ValueError as exc:
+            st.warning(f"URL không hợp lệ hoặc không đọc được: {exc}")
         except Exception as exc:
             st.exception(exc)

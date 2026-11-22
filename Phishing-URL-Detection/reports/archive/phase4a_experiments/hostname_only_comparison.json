@@ -1,0 +1,945 @@
+{
+  "status": "VERIFIED",
+  "metadata": {
+    "timestamp_utc": "2026-11-22T08:49:14.841408+00:00",
+    "python": "3.14.7",
+    "packages": {
+      "numpy": "2.5.5",
+      "pandas": "3.1.1",
+      "scikit-learn": "1.9.1",
+      "joblib": "1.6.0",
+      "tldextract": "5.4.0"
+    },
+    "seed": 42,
+    "model_v0_sha256": "099DB72DDD27948460E69DC66B35D60F5D242A963893A66EC40D688AC439C8EA"
+  },
+  "dataset": {
+    "raw_rows": 235795,
+    "rows_after_load_dataset": 235370,
+    "audit": {
+      "rows_input": 235795,
+      "url_column": "URL",
+      "label_column": "label",
+      "missing_url": 0,
+      "empty_url": 0,
+      "whitespace_url": 0,
+      "malformed_url": 0,
+      "missing_scheme_url": 0,
+      "unicode_url": 2,
+      "missing_label": 0,
+      "duplicate_url_groups": 425,
+      "duplicate_excess_rows": 425,
+      "conflicting_url_groups": 0,
+      "conflicting_url_rows": 0,
+      "rows_after_processing": 235370,
+      "label_distribution": {
+        "Legitimate": 134850,
+        "Phishing": 100520
+      }
+    },
+    "label_counts": {
+      "Legitimate": 134850,
+      "Phishing": 100520
+    }
+  },
+  "split": {
+    "outer_strategy": "registered_domain",
+    "outer_test_size": 0.2,
+    "outer_random_state": 42,
+    "validation_size": 0.15,
+    "validation_random_state": 43,
+    "sizes": {
+      "train": 188212,
+      "fit": 160009,
+      "validation": 28203,
+      "test_not_used_for_selection": 47158
+    },
+    "registered_domains": {
+      "fit": 119345,
+      "validation": 21062,
+      "test": 35102
+    },
+    "domain_overlap": {
+      "fit_validation": 0,
+      "fit_test": 0,
+      "validation_test": 0
+    }
+  },
+  "models": {
+    "E0": {
+      "type": "RandomForestClassifier",
+      "feature_columns": [
+        "url_length",
+        "hostname_length",
+        "count_dots",
+        "count_hyphens",
+        "count_underscores",
+        "count_question_marks",
+        "count_equal_signs",
+        "count_at_signs",
+        "count_ampersands",
+        "count_percent_signs",
+        "count_slashes",
+        "count_digits",
+        "digit_ratio",
+        "special_char_count",
+        "has_https",
+        "is_ip_hostname",
+        "has_www",
+        "path_length",
+        "path_segment_count",
+        "query_length",
+        "query_parameter_count",
+        "subdomain_count",
+        "tld_length",
+        "character_entropy"
+      ],
+      "metrics": {
+        "overall": {
+          "status": "VERIFIED",
+          "n": 28203,
+          "class_counts": {
+            "Legitimate": 16040,
+            "Phishing": 12163
+          },
+          "accuracy": 0.9982980533985746,
+          "precision": 1.0,
+          "recall": 0.9960536051960865,
+          "f1": 0.998022901392207,
+          "confusion_matrix_labels_0_1": [
+            [
+              16040,
+              0
+            ],
+            [
+              48,
+              12115
+            ]
+          ],
+          "TN": 16040,
+          "FP": 0,
+          "FN": 48,
+          "TP": 12115
+        },
+        "by_disjoint_url_group": {
+          "hostname_only": {
+            "status": "VERIFIED",
+            "n": 24051,
+            "class_counts": {
+              "Legitimate": 16040,
+              "Phishing": 8011
+            },
+            "accuracy": 0.9980042409879007,
+            "precision": 1.0,
+            "recall": 0.9940082386718262,
+            "f1": 0.996995117065231,
+            "confusion_matrix_labels_0_1": [
+              [
+                16040,
+                0
+              ],
+              [
+                48,
+                7963
+              ]
+            ],
+            "TN": 16040,
+            "FP": 0,
+            "FN": 48,
+            "TP": 7963
+          },
+          "path_only": {
+            "status": "VERIFIED",
+            "n": 3118,
+            "class_counts": {
+              "Legitimate": 0,
+              "Phishing": 3118
+            },
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "confusion_matrix_labels_0_1": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                3118
+              ]
+            ],
+            "TN": 0,
+            "FP": 0,
+            "FN": 0,
+            "TP": 3118
+          },
+          "query_only": {
+            "status": "VERIFIED",
+            "n": 237,
+            "class_counts": {
+              "Legitimate": 0,
+              "Phishing": 237
+            },
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "confusion_matrix_labels_0_1": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                237
+              ]
+            ],
+            "TN": 0,
+            "FP": 0,
+            "FN": 0,
+            "TP": 237
+          },
+          "path_and_query": {
+            "status": "VERIFIED",
+            "n": 797,
+            "class_counts": {
+              "Legitimate": 0,
+              "Phishing": 797
+            },
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "confusion_matrix_labels_0_1": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                797
+              ]
+            ],
+            "TN": 0,
+            "FP": 0,
+            "FN": 0,
+            "TP": 797
+          }
+        }
+      }
+    },
+    "E1": {
+      "type": "RandomForestClassifier",
+      "feature_columns": [
+        "url_length",
+        "hostname_length",
+        "count_dots",
+        "count_hyphens",
+        "count_underscores",
+        "count_question_marks",
+        "count_equal_signs",
+        "count_at_signs",
+        "count_ampersands",
+        "count_percent_signs",
+        "count_slashes",
+        "count_digits",
+        "digit_ratio",
+        "special_char_count",
+        "is_ip_hostname",
+        "path_length",
+        "path_segment_count",
+        "query_length",
+        "query_parameter_count",
+        "subdomain_count",
+        "tld_length",
+        "character_entropy"
+      ],
+      "metrics": {
+        "overall": {
+          "status": "VERIFIED",
+          "n": 28203,
+          "class_counts": {
+            "Legitimate": 16040,
+            "Phishing": 12163
+          },
+          "accuracy": 0.8527461617558416,
+          "precision": 0.9154564315352697,
+          "recall": 0.7255611280111814,
+          "f1": 0.8095216254643857,
+          "confusion_matrix_labels_0_1": [
+            [
+              15225,
+              815
+            ],
+            [
+              3338,
+              8825
+            ]
+          ],
+          "TN": 15225,
+          "FP": 815,
+          "FN": 3338,
+          "TP": 8825
+        },
+        "by_disjoint_url_group": {
+          "hostname_only": {
+            "status": "VERIFIED",
+            "n": 24051,
+            "class_counts": {
+              "Legitimate": 16040,
+              "Phishing": 8011
+            },
+            "accuracy": 0.8273252671406595,
+            "precision": 0.8514941690962099,
+            "recall": 0.5833229309699164,
+            "f1": 0.6923475813023187,
+            "confusion_matrix_labels_0_1": [
+              [
+                15225,
+                815
+              ],
+              [
+                3338,
+                4673
+              ]
+            ],
+            "TN": 15225,
+            "FP": 815,
+            "FN": 3338,
+            "TP": 4673
+          },
+          "path_only": {
+            "status": "VERIFIED",
+            "n": 3118,
+            "class_counts": {
+              "Legitimate": 0,
+              "Phishing": 3118
+            },
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "confusion_matrix_labels_0_1": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                3118
+              ]
+            ],
+            "TN": 0,
+            "FP": 0,
+            "FN": 0,
+            "TP": 3118
+          },
+          "query_only": {
+            "status": "VERIFIED",
+            "n": 237,
+            "class_counts": {
+              "Legitimate": 0,
+              "Phishing": 237
+            },
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "confusion_matrix_labels_0_1": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                237
+              ]
+            ],
+            "TN": 0,
+            "FP": 0,
+            "FN": 0,
+            "TP": 237
+          },
+          "path_and_query": {
+            "status": "VERIFIED",
+            "n": 797,
+            "class_counts": {
+              "Legitimate": 0,
+              "Phishing": 797
+            },
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "confusion_matrix_labels_0_1": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                797
+              ]
+            ],
+            "TN": 0,
+            "FP": 0,
+            "FN": 0,
+            "TP": 797
+          }
+        }
+      },
+      "reproduction": {
+        "previous_recorded_validation_f1": 0.8095216254643857,
+        "recreated_validation_f1": 0.8095216254643857,
+        "matches_previous_with_abs_tolerance_1e-12": true,
+        "note": "E1 is fit again on X_fit using the saved robust transformer implementation and prior RF recipe; no previous fitted E1 artifact existed."
+      }
+    },
+    "E2": {
+      "type": "RandomForestClassifier",
+      "feature_columns": [
+        "hostname_length",
+        "count_dots",
+        "count_hyphens",
+        "count_underscores",
+        "count_digits",
+        "digit_ratio",
+        "special_char_count",
+        "character_entropy",
+        "subdomain_count",
+        "tld_length",
+        "has_ip_address",
+        "has_punycode"
+      ],
+      "hyperparameters": {
+        "n_estimators": 250,
+        "max_features": "sqrt",
+        "max_depth": null,
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "bootstrap": true,
+        "class_weight": "balanced_subsample",
+        "n_jobs": -1,
+        "random_state": 42
+      },
+      "metrics": {
+        "overall": {
+          "status": "VERIFIED",
+          "n": 28203,
+          "class_counts": {
+            "Legitimate": 16040,
+            "Phishing": 12163
+          },
+          "accuracy": 0.8108002694748786,
+          "precision": 0.8745747832766377,
+          "recall": 0.6552659705664721,
+          "f1": 0.7492009776273736,
+          "confusion_matrix_labels_0_1": [
+            [
+              14897,
+              1143
+            ],
+            [
+              4193,
+              7970
+            ]
+          ],
+          "TN": 14897,
+          "FP": 1143,
+          "FN": 4193,
+          "TP": 7970
+        },
+        "by_disjoint_url_group": {
+          "hostname_only": {
+            "status": "VERIFIED",
+            "n": 24051,
+            "class_counts": {
+              "Legitimate": 16040,
+              "Phishing": 8011
+            },
+            "accuracy": 0.8193422310922622,
+            "precision": 0.8079637096774194,
+            "recall": 0.6002995880664087,
+            "f1": 0.6888204540571511,
+            "confusion_matrix_labels_0_1": [
+              [
+                14897,
+                1143
+              ],
+              [
+                3202,
+                4809
+              ]
+            ],
+            "TN": 14897,
+            "FP": 1143,
+            "FN": 3202,
+            "TP": 4809
+          },
+          "path_only": {
+            "status": "VERIFIED",
+            "n": 3118,
+            "class_counts": {
+              "Legitimate": 0,
+              "Phishing": 3118
+            },
+            "accuracy": 0.758819756254009,
+            "precision": 1.0,
+            "recall": 0.758819756254009,
+            "f1": 0.862873814733771,
+            "confusion_matrix_labels_0_1": [
+              [
+                0,
+                0
+              ],
+              [
+                752,
+                2366
+              ]
+            ],
+            "TN": 0,
+            "FP": 0,
+            "FN": 752,
+            "TP": 2366
+          },
+          "query_only": {
+            "status": "VERIFIED",
+            "n": 237,
+            "class_counts": {
+              "Legitimate": 0,
+              "Phishing": 237
+            },
+            "accuracy": 0.9240506329113924,
+            "precision": 1.0,
+            "recall": 0.9240506329113924,
+            "f1": 0.9605263157894737,
+            "confusion_matrix_labels_0_1": [
+              [
+                0,
+                0
+              ],
+              [
+                18,
+                219
+              ]
+            ],
+            "TN": 0,
+            "FP": 0,
+            "FN": 18,
+            "TP": 219
+          },
+          "path_and_query": {
+            "status": "VERIFIED",
+            "n": 797,
+            "class_counts": {
+              "Legitimate": 0,
+              "Phishing": 797
+            },
+            "accuracy": 0.7227101631116688,
+            "precision": 1.0,
+            "recall": 0.7227101631116688,
+            "f1": 0.8390386016023307,
+            "confusion_matrix_labels_0_1": [
+              [
+                0,
+                0
+              ],
+              [
+                221,
+                576
+              ]
+            ],
+            "TN": 0,
+            "FP": 0,
+            "FN": 221,
+            "TP": 576
+          }
+        }
+      }
+    }
+  },
+  "manual_check": {
+    "status": "REFERENCE_ONLY",
+    "n": 25,
+    "class_counts": {
+      "Legitimate": 20,
+      "Phishing": 5
+    },
+    "exact_url_overlap": 0,
+    "seen_registered_domains": [
+      "google.com",
+      "python.org",
+      "stackoverflow.com"
+    ],
+    "unseen_registered_domains": [
+      "apple-id-locked.support",
+      "facebook.com",
+      "github.com",
+      "hcmus.edu.vn",
+      "hcmut.edu.vn",
+      "ip:192.168.1.10",
+      "microsoft.com",
+      "paypa1-secure-verify.xyz",
+      "secure-update-account.top",
+      "shopee.vn",
+      "tuoitre.vn",
+      "uit.edu.vn",
+      "vietcombank-xacminh.info",
+      "vietcombank.com.vn",
+      "vnexpress.net",
+      "wikipedia.org",
+      "youtube.com"
+    ],
+    "seen_domain_metrics": {
+      "E0": {
+        "status": "VERIFIED",
+        "n": 5,
+        "class_counts": {
+          "Legitimate": 5,
+          "Phishing": 0
+        },
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "confusion_matrix_labels_0_1": [
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "TN": 0,
+        "FP": 5,
+        "FN": 0,
+        "TP": 0
+      },
+      "E1": {
+        "status": "VERIFIED",
+        "n": 5,
+        "class_counts": {
+          "Legitimate": 5,
+          "Phishing": 0
+        },
+        "accuracy": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "confusion_matrix_labels_0_1": [
+          [
+            0,
+            5
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "TN": 0,
+        "FP": 5,
+        "FN": 0,
+        "TP": 0
+      },
+      "E2": {
+        "status": "VERIFIED",
+        "n": 5,
+        "class_counts": {
+          "Legitimate": 5,
+          "Phishing": 0
+        },
+        "accuracy": 0.4,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "confusion_matrix_labels_0_1": [
+          [
+            2,
+            3
+          ],
+          [
+            0,
+            0
+          ]
+        ],
+        "TN": 2,
+        "FP": 3,
+        "FN": 0,
+        "TP": 0
+      }
+    },
+    "unseen_domain_metrics": {
+      "E0": {
+        "status": "VERIFIED",
+        "n": 20,
+        "class_counts": {
+          "Legitimate": 15,
+          "Phishing": 5
+        },
+        "accuracy": 0.25,
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4,
+        "confusion_matrix_labels_0_1": [
+          [
+            0,
+            15
+          ],
+          [
+            0,
+            5
+          ]
+        ],
+        "TN": 0,
+        "FP": 15,
+        "FN": 0,
+        "TP": 5
+      },
+      "E1": {
+        "status": "VERIFIED",
+        "n": 20,
+        "class_counts": {
+          "Legitimate": 15,
+          "Phishing": 5
+        },
+        "accuracy": 0.65,
+        "precision": 0.4166666666666667,
+        "recall": 1.0,
+        "f1": 0.5882352941176471,
+        "confusion_matrix_labels_0_1": [
+          [
+            8,
+            7
+          ],
+          [
+            0,
+            5
+          ]
+        ],
+        "TN": 8,
+        "FP": 7,
+        "FN": 0,
+        "TP": 5
+      },
+      "E2": {
+        "status": "VERIFIED",
+        "n": 20,
+        "class_counts": {
+          "Legitimate": 15,
+          "Phishing": 5
+        },
+        "accuracy": 0.8,
+        "precision": 0.5555555555555556,
+        "recall": 1.0,
+        "f1": 0.7142857142857143,
+        "confusion_matrix_labels_0_1": [
+          [
+            11,
+            4
+          ],
+          [
+            0,
+            5
+          ]
+        ],
+        "TN": 11,
+        "FP": 4,
+        "FN": 0,
+        "TP": 5
+      }
+    },
+    "overall_metrics": {
+      "E0": {
+        "status": "VERIFIED",
+        "n": 25,
+        "class_counts": {
+          "Legitimate": 20,
+          "Phishing": 5
+        },
+        "accuracy": 0.2,
+        "precision": 0.2,
+        "recall": 1.0,
+        "f1": 0.3333333333333333,
+        "confusion_matrix_labels_0_1": [
+          [
+            0,
+            20
+          ],
+          [
+            0,
+            5
+          ]
+        ],
+        "TN": 0,
+        "FP": 20,
+        "FN": 0,
+        "TP": 5
+      },
+      "E1": {
+        "status": "VERIFIED",
+        "n": 25,
+        "class_counts": {
+          "Legitimate": 20,
+          "Phishing": 5
+        },
+        "accuracy": 0.52,
+        "precision": 0.29411764705882354,
+        "recall": 1.0,
+        "f1": 0.45454545454545453,
+        "confusion_matrix_labels_0_1": [
+          [
+            8,
+            12
+          ],
+          [
+            0,
+            5
+          ]
+        ],
+        "TN": 8,
+        "FP": 12,
+        "FN": 0,
+        "TP": 5
+      },
+      "E2": {
+        "status": "VERIFIED",
+        "n": 25,
+        "class_counts": {
+          "Legitimate": 20,
+          "Phishing": 5
+        },
+        "accuracy": 0.72,
+        "precision": 0.4166666666666667,
+        "recall": 1.0,
+        "f1": 0.5882352941176471,
+        "confusion_matrix_labels_0_1": [
+          [
+            13,
+            7
+          ],
+          [
+            0,
+            5
+          ]
+        ],
+        "TN": 13,
+        "FP": 7,
+        "FN": 0,
+        "TP": 5
+      }
+    },
+    "limitation": "This 25-URL curated manual set is not an independent benchmark and was not used for fitting or model selection."
+  },
+  "E2_feature_importance": [
+    {
+      "feature": "subdomain_count",
+      "importance": 0.29698425640268694
+    },
+    {
+      "feature": "character_entropy",
+      "importance": 0.1389788222476746
+    },
+    {
+      "feature": "count_dots",
+      "importance": 0.1233397427267244
+    },
+    {
+      "feature": "hostname_length",
+      "importance": 0.09508368034950783
+    },
+    {
+      "feature": "special_char_count",
+      "importance": 0.08714056537975488
+    },
+    {
+      "feature": "digit_ratio",
+      "importance": 0.08320329912991878
+    },
+    {
+      "feature": "count_digits",
+      "importance": 0.07907937549412407
+    },
+    {
+      "feature": "tld_length",
+      "importance": 0.07264917340799128
+    },
+    {
+      "feature": "count_hyphens",
+      "importance": 0.021891222452572953
+    },
+    {
+      "feature": "has_ip_address",
+      "importance": 0.0014137318113144814
+    },
+    {
+      "feature": "has_punycode",
+      "importance": 0.0002361305977296926
+    },
+    {
+      "feature": "count_underscores",
+      "importance": 0.0
+    }
+  ],
+  "consistency_checks": {
+    "inputs": [
+      "https://daa.uit.edu.vn/",
+      "daa.uit.edu.vn",
+      "https://www.daa.uit.edu.vn/",
+      "https://www.google.com/"
+    ],
+    "results": [
+      {
+        "url": "https://daa.uit.edu.vn/",
+        "prediction": 0,
+        "label": "Legitimate",
+        "processing_time_ms": 57.15480000071693,
+        "probability_legitimate": 0.709541431185675,
+        "probability_phishing": 0.29045856881432464
+      },
+      {
+        "url": "daa.uit.edu.vn",
+        "prediction": 0,
+        "label": "Legitimate",
+        "processing_time_ms": 57.15480000071693,
+        "probability_legitimate": 0.709541431185675,
+        "probability_phishing": 0.29045856881432464
+      },
+      {
+        "url": "https://www.daa.uit.edu.vn/",
+        "prediction": 0,
+        "label": "Legitimate",
+        "processing_time_ms": 57.15480000071693,
+        "probability_legitimate": 0.709541431185675,
+        "probability_phishing": 0.29045856881432464
+      },
+      {
+        "url": "https://www.google.com/",
+        "prediction": 0,
+        "label": "Legitimate",
+        "processing_time_ms": 57.15480000071693,
+        "probability_legitimate": 0.5705305680444545,
+        "probability_phishing": 0.42946943195554554
+      }
+    ],
+    "three_uit_feature_vectors_equal": true,
+    "three_uit_predictions_equal": true,
+    "three_uit_phishing_probabilities_equal_with_tolerance_1e-9": true,
+    "note": "Consistency is not evidence that predictions are correct."
+  },
+  "artifact": {
+    "path": "models\\model_v2_hostname_only.joblib",
+    "sha256": "45E4721CC296EBC79E13752282E5E53A73416771E3733FBF8AB375D7431CD547",
+    "size_bytes": 211841432,
+    "reload_verified": true
+  },
+  "test_policy": "No test metrics were computed; test data was not used for selection or fitting.",
+  "limitations": [
+    "E2 discards path/query/fragment and may lose useful phishing indicators.",
+    "Validation results are on PhiUSIIL and do not establish real-world generalization.",
+    "Manual check is curated and too small to be an independent benchmark.",
+    "E1 is recreated from the recorded recipe because no fitted E1 artifact exists."
+  ]
+}

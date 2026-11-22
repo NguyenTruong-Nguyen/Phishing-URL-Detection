@@ -1,0 +1,86 @@
+{
+  "models": [
+    "random_forest",
+    "logistic_regression",
+    "knn"
+  ],
+  "validation_rows": 28203,
+  "split": {
+    "outer_strategy": "registered_domain",
+    "random_state": 42,
+    "validation_random_state": 43,
+    "fit_rows": 160009,
+    "validation_rows": 28203,
+    "test_rows": 47158,
+    "fit_domains": 119345,
+    "validation_domains": 21062,
+    "test_domains": 35102,
+    "domain_overlap": {
+      "fit_validation": 0,
+      "fit_test": 0,
+      "validation_test": 0
+    }
+  },
+  "test_used_for_selection": false,
+  "random_forest_metrics_source": "existing baseline_metrics.json fit-only validation result",
+  "validation_metrics": {
+    "random_forest": {
+      "model": "random_forest_validation",
+      "accuracy": 0.9977307378647662,
+      "precision": 0.999587083987117,
+      "recall": 0.9951492230535229,
+      "f1": 0.997363216875412,
+      "confusion_matrix": [
+        [
+          16035,
+          5
+        ],
+        [
+          59,
+          12104
+        ]
+      ],
+      "training_time_seconds": 24.837450399998488,
+      "roc_auc": 0.9981167692460045,
+      "prediction_ms_per_url": 0.09223180867282875
+    },
+    "logistic_regression": {
+      "model": "logistic_regression_validation",
+      "accuracy": 0.9968797645640535,
+      "precision": 0.9999171979796307,
+      "recall": 0.9928471594179068,
+      "f1": 0.9963696369636964,
+      "confusion_matrix": [
+        [
+          16039,
+          1
+        ],
+        [
+          87,
+          12076
+        ]
+      ],
+      "roc_auc": 0.998025613430864,
+      "prediction_ms_per_url": 0.031001889869842238
+    },
+    "knn": {
+      "model": "knn_validation",
+      "accuracy": 0.997447080097862,
+      "precision": 0.999752004629247,
+      "recall": 0.9943270574693743,
+      "f1": 0.9970321516900247,
+      "confusion_matrix": [
+        [
+          16037,
+          3
+        ],
+        [
+          69,
+          12094
+        ]
+      ],
+      "roc_auc": 0.9976994433262399,
+      "prediction_ms_per_url": 0.6860145090946378
+    }
+  }
+}

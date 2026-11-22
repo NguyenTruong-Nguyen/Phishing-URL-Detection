@@ -1,0 +1,20 @@
+{
+  "Legitimate": {
+    "n": 1000,
+    "excluded_after_scheme_strip": 0,
+    "phishing_rate_with_scheme": 0.0,
+    "phishing_rate_without_scheme": 1.0,
+    "flip_rate": 1.0,
+    "accuracy_with_scheme": 1.0,
+    "accuracy_without_scheme": 0.0
+  },
+  "Phishing": {
+    "n": 1000,
+    "excluded_after_scheme_strip": 138,
+    "phishing_rate_with_scheme": 0.992,
+    "phishing_rate_without_scheme": 1.0,
+    "flip_rate": 0.008,
+    "accuracy_with_scheme": 0.992,
+    "accuracy_without_scheme": 1.0
+  }
+}

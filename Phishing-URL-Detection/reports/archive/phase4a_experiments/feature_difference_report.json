@@ -1,0 +1,1724 @@
+{
+  "status": "VERIFIED",
+  "urls_checked": 16,
+  "e0_transformer": "URLFeatureTransformer",
+  "e1_transformer": "RobustURLFeatureTransformer",
+  "e0_feature_count": 24,
+  "e1_feature_count": 22,
+  "common_feature_count": 22,
+  "comparable_feature_count_excluding_semantic_definition_changes": 20,
+  "common_features": [
+    "url_length",
+    "hostname_length",
+    "count_dots",
+    "count_hyphens",
+    "count_underscores",
+    "count_question_marks",
+    "count_equal_signs",
+    "count_at_signs",
+    "count_ampersands",
+    "count_percent_signs",
+    "count_slashes",
+    "count_digits",
+    "digit_ratio",
+    "special_char_count",
+    "is_ip_hostname",
+    "path_length",
+    "path_segment_count",
+    "query_length",
+    "query_parameter_count",
+    "subdomain_count",
+    "tld_length",
+    "character_entropy"
+  ],
+  "features_with_changed_semantics": [
+    "subdomain_count",
+    "tld_length"
+  ],
+  "features_dropped_in_e1": [
+    "has_https",
+    "has_www"
+  ],
+  "category_notes": {
+    "scheme_normalization": "E1 removes the scheme before direct counts/entropy and drops has_https; E0 observes scheme characters and has_https.",
+    "www_normalization": "E1 removes one leading www. and drops has_www; E0 keeps both.",
+    "character_features": "E1 recomputes direct lexical counts, length and entropy on normalized text; structural fields come from the shared extractor.",
+    "psl_subdomain": "E1 uses PSL-aware subdomain extraction; E0's subdomain feature is a simple hostname-label heuristic.",
+    "removed_features": [
+      "has_https",
+      "has_www"
+    ]
+  },
+  "url_results": [
+    {
+      "url": "https://www.example.com",
+      "e0_feature_vector": {
+        "url_length": 23.0,
+        "hostname_length": 15.0,
+        "count_dots": 2.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 2.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 5.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 1.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 1.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.795088586397732
+      },
+      "e1_feature_vector": {
+        "url_length": 11.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 0.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 1.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.095795255000934
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 23.0,
+          "e1_value": 11.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "hostname_length",
+          "e0_value": 15.0,
+          "e1_value": 11.0,
+          "reason": "May change when E1 removes a leading www.; parser semantics otherwise align."
+        },
+        {
+          "feature": "count_dots",
+          "e0_value": 2.0,
+          "e1_value": 1.0,
+          "reason": "May change when E1 removes www.; this is a direct character count."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 2.0,
+          "e1_value": 0.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 5.0,
+          "e1_value": 1.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 3.795088586397732,
+          "e1_value": 3.095795255000934,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 6,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 1.0,
+          "e1_value": 0.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 1.0
+      }
+    },
+    {
+      "url": "http://www.example.com",
+      "e0_feature_vector": {
+        "url_length": 22.0,
+        "hostname_length": 15.0,
+        "count_dots": 2.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 2.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 5.0,
+        "has_https": 0.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 1.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 1.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.6978458230844122
+      },
+      "e1_feature_vector": {
+        "url_length": 11.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 0.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 1.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.095795255000934
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 22.0,
+          "e1_value": 11.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "hostname_length",
+          "e0_value": 15.0,
+          "e1_value": 11.0,
+          "reason": "May change when E1 removes a leading www.; parser semantics otherwise align."
+        },
+        {
+          "feature": "count_dots",
+          "e0_value": 2.0,
+          "e1_value": 1.0,
+          "reason": "May change when E1 removes www.; this is a direct character count."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 2.0,
+          "e1_value": 0.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 5.0,
+          "e1_value": 1.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 3.6978458230844122,
+          "e1_value": 3.095795255000934,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 6,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 1.0,
+          "e1_value": 0.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 0.0,
+        "has_www": 1.0
+      }
+    },
+    {
+      "url": "example.com",
+      "e0_feature_vector": {
+        "url_length": 11.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 0.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 1.0,
+        "has_https": 0.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 0.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.095795255000934
+      },
+      "e1_feature_vector": {
+        "url_length": 11.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 0.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 1.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.095795255000934
+      },
+      "changed_comparable_features": [],
+      "changed_comparable_feature_count": 0,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 0.0,
+          "e1_value": 0.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 0.0,
+        "has_www": 0.0
+      }
+    },
+    {
+      "url": "https://example.com",
+      "e0_feature_vector": {
+        "url_length": 19.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 2.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 4.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 0.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.721611723969901
+      },
+      "e1_feature_vector": {
+        "url_length": 11.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 0.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 1.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.095795255000934
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 19.0,
+          "e1_value": 11.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 2.0,
+          "e1_value": 0.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 4.0,
+          "e1_value": 1.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 3.721611723969901,
+          "e1_value": 3.095795255000934,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 4,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 0.0,
+          "e1_value": 0.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 0.0
+      }
+    },
+    {
+      "url": "https://www.example.com/login",
+      "e0_feature_vector": {
+        "url_length": 29.0,
+        "hostname_length": 15.0,
+        "count_dots": 2.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 3.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 6.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 1.0,
+        "path_length": 6.0,
+        "path_segment_count": 1.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 1.0,
+        "tld_length": 3.0,
+        "character_entropy": 4.0472990984266435
+      },
+      "e1_feature_vector": {
+        "url_length": 17.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 1.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 2.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 6.0,
+        "path_segment_count": 1.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.616874605956222
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 29.0,
+          "e1_value": 17.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "hostname_length",
+          "e0_value": 15.0,
+          "e1_value": 11.0,
+          "reason": "May change when E1 removes a leading www.; parser semantics otherwise align."
+        },
+        {
+          "feature": "count_dots",
+          "e0_value": 2.0,
+          "e1_value": 1.0,
+          "reason": "May change when E1 removes www.; this is a direct character count."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 3.0,
+          "e1_value": 1.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 6.0,
+          "e1_value": 2.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 4.0472990984266435,
+          "e1_value": 3.616874605956222,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 6,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 1.0,
+          "e1_value": 0.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 1.0
+      }
+    },
+    {
+      "url": "https://www.example.com/login/verify.php",
+      "e0_feature_vector": {
+        "url_length": 40.0,
+        "hostname_length": 15.0,
+        "count_dots": 3.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 4.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 8.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 1.0,
+        "path_length": 17.0,
+        "path_segment_count": 2.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 1.0,
+        "tld_length": 3.0,
+        "character_entropy": 4.265311532225103
+      },
+      "e1_feature_vector": {
+        "url_length": 28.0,
+        "hostname_length": 11.0,
+        "count_dots": 2.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 2.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 4.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 17.0,
+        "path_segment_count": 2.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 4.039148671903071
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 40.0,
+          "e1_value": 28.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "hostname_length",
+          "e0_value": 15.0,
+          "e1_value": 11.0,
+          "reason": "May change when E1 removes a leading www.; parser semantics otherwise align."
+        },
+        {
+          "feature": "count_dots",
+          "e0_value": 3.0,
+          "e1_value": 2.0,
+          "reason": "May change when E1 removes www.; this is a direct character count."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 4.0,
+          "e1_value": 2.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 8.0,
+          "e1_value": 4.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 4.265311532225103,
+          "e1_value": 4.039148671903071,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 6,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 1.0,
+          "e1_value": 0.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 1.0
+      }
+    },
+    {
+      "url": "https://sub.example.com/path",
+      "e0_feature_vector": {
+        "url_length": 28.0,
+        "hostname_length": 15.0,
+        "count_dots": 2.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 3.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 6.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 0.0,
+        "path_length": 5.0,
+        "path_segment_count": 1.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 1.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.8693312611115185
+      },
+      "e1_feature_vector": {
+        "url_length": 20.0,
+        "hostname_length": 15.0,
+        "count_dots": 2.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 1.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 3.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 5.0,
+        "path_segment_count": 1.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 1.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.8219280948873626
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 28.0,
+          "e1_value": 20.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 3.0,
+          "e1_value": 1.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 6.0,
+          "e1_value": 3.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 3.8693312611115185,
+          "e1_value": 3.8219280948873626,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 4,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 1.0,
+          "e1_value": 1.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 0.0
+      }
+    },
+    {
+      "url": "https://daa.uit.edu.vn/",
+      "e0_feature_vector": {
+        "url_length": 23.0,
+        "hostname_length": 14.0,
+        "count_dots": 3.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 3.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 7.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 0.0,
+        "path_length": 1.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 2.0,
+        "tld_length": 2.0,
+        "character_entropy": 3.642489673166126
+      },
+      "e1_feature_vector": {
+        "url_length": 14.0,
+        "hostname_length": 14.0,
+        "count_dots": 3.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 0.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 3.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 1.0,
+        "tld_length": 2.0,
+        "character_entropy": 3.0391486719030705
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 23.0,
+          "e1_value": 14.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 3.0,
+          "e1_value": 0.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 7.0,
+          "e1_value": 3.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "path_length",
+          "e0_value": 1.0,
+          "e1_value": 0.0,
+          "reason": "Feature computed from different URL representations."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 3.642489673166126,
+          "e1_value": 3.0391486719030705,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 5,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 2.0,
+          "e1_value": 1.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 2.0,
+          "e1_value": 2.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 0.0
+      }
+    },
+    {
+      "url": "daa.uit.edu.vn",
+      "e0_feature_vector": {
+        "url_length": 14.0,
+        "hostname_length": 14.0,
+        "count_dots": 3.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 0.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 3.0,
+        "has_https": 0.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 0.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 2.0,
+        "tld_length": 2.0,
+        "character_entropy": 3.0391486719030705
+      },
+      "e1_feature_vector": {
+        "url_length": 14.0,
+        "hostname_length": 14.0,
+        "count_dots": 3.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 0.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 3.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 1.0,
+        "tld_length": 2.0,
+        "character_entropy": 3.0391486719030705
+      },
+      "changed_comparable_features": [],
+      "changed_comparable_feature_count": 0,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 2.0,
+          "e1_value": 1.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 2.0,
+          "e1_value": 2.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 0.0,
+        "has_www": 0.0
+      }
+    },
+    {
+      "url": "https://www.daa.uit.edu.vn/",
+      "e0_feature_vector": {
+        "url_length": 27.0,
+        "hostname_length": 18.0,
+        "count_dots": 4.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 3.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 8.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 1.0,
+        "path_length": 1.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 3.0,
+        "tld_length": 2.0,
+        "character_entropy": 3.7080481500712312
+      },
+      "e1_feature_vector": {
+        "url_length": 14.0,
+        "hostname_length": 14.0,
+        "count_dots": 3.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 0.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 3.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 0.0,
+        "path_segment_count": 0.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 1.0,
+        "tld_length": 2.0,
+        "character_entropy": 3.0391486719030705
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 27.0,
+          "e1_value": 14.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "hostname_length",
+          "e0_value": 18.0,
+          "e1_value": 14.0,
+          "reason": "May change when E1 removes a leading www.; parser semantics otherwise align."
+        },
+        {
+          "feature": "count_dots",
+          "e0_value": 4.0,
+          "e1_value": 3.0,
+          "reason": "May change when E1 removes www.; this is a direct character count."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 3.0,
+          "e1_value": 0.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 8.0,
+          "e1_value": 3.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "path_length",
+          "e0_value": 1.0,
+          "e1_value": 0.0,
+          "reason": "Feature computed from different URL representations."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 3.7080481500712312,
+          "e1_value": 3.0391486719030705,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 7,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 3.0,
+          "e1_value": 1.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 2.0,
+          "e1_value": 2.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 1.0
+      }
+    },
+    {
+      "url": "https://www.example.com/search?q=two+words",
+      "e0_feature_vector": {
+        "url_length": 42.0,
+        "hostname_length": 15.0,
+        "count_dots": 2.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 1.0,
+        "count_equal_signs": 1.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 3.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 9.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 1.0,
+        "path_length": 7.0,
+        "path_segment_count": 1.0,
+        "query_length": 11.0,
+        "query_parameter_count": 1.0,
+        "subdomain_count": 1.0,
+        "tld_length": 3.0,
+        "character_entropy": 4.216506042177471
+      },
+      "e1_feature_vector": {
+        "url_length": 30.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 1.0,
+        "count_equal_signs": 1.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 1.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 5.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 7.0,
+        "path_segment_count": 1.0,
+        "query_length": 11.0,
+        "query_parameter_count": 1.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 4.1898980954642875
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 42.0,
+          "e1_value": 30.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "hostname_length",
+          "e0_value": 15.0,
+          "e1_value": 11.0,
+          "reason": "May change when E1 removes a leading www.; parser semantics otherwise align."
+        },
+        {
+          "feature": "count_dots",
+          "e0_value": 2.0,
+          "e1_value": 1.0,
+          "reason": "May change when E1 removes www.; this is a direct character count."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 3.0,
+          "e1_value": 1.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 9.0,
+          "e1_value": 5.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 4.216506042177471,
+          "e1_value": 4.1898980954642875,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 6,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 1.0,
+          "e1_value": 0.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 1.0
+      }
+    },
+    {
+      "url": "https://www.example.com/path#section-2",
+      "e0_feature_vector": {
+        "url_length": 38.0,
+        "hostname_length": 15.0,
+        "count_dots": 2.0,
+        "count_hyphens": 1.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 3.0,
+        "count_digits": 1.0,
+        "digit_ratio": 0.02631578947368421,
+        "special_char_count": 8.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 1.0,
+        "path_length": 5.0,
+        "path_segment_count": 1.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 1.0,
+        "tld_length": 3.0,
+        "character_entropy": 4.168465671110589
+      },
+      "e1_feature_vector": {
+        "url_length": 26.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 1.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 1.0,
+        "count_digits": 1.0,
+        "digit_ratio": 0.038461538461538464,
+        "special_char_count": 4.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 5.0,
+        "path_segment_count": 1.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 4.056020968057882
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 38.0,
+          "e1_value": 26.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "hostname_length",
+          "e0_value": 15.0,
+          "e1_value": 11.0,
+          "reason": "May change when E1 removes a leading www.; parser semantics otherwise align."
+        },
+        {
+          "feature": "count_dots",
+          "e0_value": 2.0,
+          "e1_value": 1.0,
+          "reason": "May change when E1 removes www.; this is a direct character count."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 3.0,
+          "e1_value": 1.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "digit_ratio",
+          "e0_value": 0.02631578947368421,
+          "e1_value": 0.038461538461538464,
+          "reason": "Length and digit numerator are computed over different URL strings."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 8.0,
+          "e1_value": 4.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 4.168465671110589,
+          "e1_value": 4.056020968057882,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 7,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 1.0,
+          "e1_value": 0.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 1.0
+      }
+    },
+    {
+      "url": "https://a.b.example.com/path",
+      "e0_feature_vector": {
+        "url_length": 28.0,
+        "hostname_length": 15.0,
+        "count_dots": 3.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 3.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 7.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 0.0,
+        "path_length": 5.0,
+        "path_segment_count": 1.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 2.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.743982153814128
+      },
+      "e1_feature_vector": {
+        "url_length": 20.0,
+        "hostname_length": 15.0,
+        "count_dots": 3.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 1.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 4.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 5.0,
+        "path_segment_count": 1.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 2.0,
+        "tld_length": 3.0,
+        "character_entropy": 3.5464393446710156
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 28.0,
+          "e1_value": 20.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 3.0,
+          "e1_value": 1.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 7.0,
+          "e1_value": 4.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 3.743982153814128,
+          "e1_value": 3.5464393446710156,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 4,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 2.0,
+          "e1_value": 2.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 0.0
+      }
+    },
+    {
+      "url": "https://example.com/id/123456789",
+      "e0_feature_vector": {
+        "url_length": 32.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 4.0,
+        "count_digits": 9.0,
+        "digit_ratio": 0.28125,
+        "special_char_count": 6.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 0.0,
+        "path_length": 13.0,
+        "path_segment_count": 2.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 4.5
+      },
+      "e1_feature_vector": {
+        "url_length": 24.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 2.0,
+        "count_digits": 9.0,
+        "digit_ratio": 0.375,
+        "special_char_count": 3.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 13.0,
+        "path_segment_count": 2.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 4.334962500721156
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 32.0,
+          "e1_value": 24.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 4.0,
+          "e1_value": 2.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "digit_ratio",
+          "e0_value": 0.28125,
+          "e1_value": 0.375,
+          "reason": "Length and digit numerator are computed over different URL strings."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 6.0,
+          "e1_value": 3.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 4.5,
+          "e1_value": 4.334962500721156,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 5,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 0.0,
+          "e1_value": 0.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 0.0
+      }
+    },
+    {
+      "url": "https://example.com/a_b/%24x?x=%2F",
+      "e0_feature_vector": {
+        "url_length": 34.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 1.0,
+        "count_question_marks": 1.0,
+        "count_equal_signs": 1.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 2.0,
+        "count_slashes": 4.0,
+        "count_digits": 3.0,
+        "digit_ratio": 0.08823529411764706,
+        "special_char_count": 11.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 0.0,
+        "path_length": 9.0,
+        "path_segment_count": 2.0,
+        "query_length": 5.0,
+        "query_parameter_count": 1.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 4.300554385304355
+      },
+      "e1_feature_vector": {
+        "url_length": 26.0,
+        "hostname_length": 11.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 1.0,
+        "count_question_marks": 1.0,
+        "count_equal_signs": 1.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 2.0,
+        "count_slashes": 2.0,
+        "count_digits": 3.0,
+        "digit_ratio": 0.11538461538461539,
+        "special_char_count": 8.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 9.0,
+        "path_segment_count": 2.0,
+        "query_length": 5.0,
+        "query_parameter_count": 1.0,
+        "subdomain_count": 0.0,
+        "tld_length": 3.0,
+        "character_entropy": 4.056020968057882
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 34.0,
+          "e1_value": 26.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 4.0,
+          "e1_value": 2.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "digit_ratio",
+          "e0_value": 0.08823529411764706,
+          "e1_value": 0.11538461538461539,
+          "reason": "Length and digit numerator are computed over different URL strings."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 11.0,
+          "e1_value": 8.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 4.300554385304355,
+          "e1_value": 4.056020968057882,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 5,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 0.0,
+          "e1_value": 0.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 3.0,
+          "e1_value": 3.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 0.0
+      }
+    },
+    {
+      "url": "https://bücher.example/path",
+      "e0_feature_vector": {
+        "url_length": 27.0,
+        "hostname_length": 14.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 3.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 6.0,
+        "has_https": 1.0,
+        "is_ip_hostname": 0.0,
+        "has_www": 0.0,
+        "path_length": 5.0,
+        "path_segment_count": 1.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 7.0,
+        "character_entropy": 3.8002787054665297
+      },
+      "e1_feature_vector": {
+        "url_length": 19.0,
+        "hostname_length": 14.0,
+        "count_dots": 1.0,
+        "count_hyphens": 0.0,
+        "count_underscores": 0.0,
+        "count_question_marks": 0.0,
+        "count_equal_signs": 0.0,
+        "count_at_signs": 0.0,
+        "count_ampersands": 0.0,
+        "count_percent_signs": 0.0,
+        "count_slashes": 1.0,
+        "count_digits": 0.0,
+        "digit_ratio": 0.0,
+        "special_char_count": 3.0,
+        "is_ip_hostname": 0.0,
+        "path_length": 5.0,
+        "path_segment_count": 1.0,
+        "query_length": 0.0,
+        "query_parameter_count": 0.0,
+        "subdomain_count": 0.0,
+        "tld_length": 0.0,
+        "character_entropy": 3.6818808028034025
+      },
+      "changed_comparable_features": [
+        {
+          "feature": "url_length",
+          "e0_value": 27.0,
+          "e1_value": 19.0,
+          "reason": "E1 measures the normalized URL without scheme/www; E0 measures the supplied URL string."
+        },
+        {
+          "feature": "count_slashes",
+          "e0_value": 3.0,
+          "e1_value": 1.0,
+          "reason": "E1 removes scheme and a root-only slash before counting."
+        },
+        {
+          "feature": "special_char_count",
+          "e0_value": 6.0,
+          "e1_value": 3.0,
+          "reason": "E0 counts over original URL; E1 counts over normalized URL."
+        },
+        {
+          "feature": "character_entropy",
+          "e0_value": 3.8002787054665297,
+          "e1_value": 3.6818808028034025,
+          "reason": "E0 entropy covers the original URL; E1 entropy covers normalized text."
+        }
+      ],
+      "changed_comparable_feature_count": 4,
+      "semantic_definition_differences": [
+        {
+          "feature": "subdomain_count",
+          "e0_value": 0.0,
+          "e1_value": 0.0,
+          "reason": "E1 uses offline PSL extraction; E0 uses a label-count heuristic. Definitions differ.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        },
+        {
+          "feature": "tld_length",
+          "e0_value": 7.0,
+          "e1_value": 0.0,
+          "reason": "E1 derives the final suffix label using PSL; E0 derives the final hostname label.",
+          "direct_numeric_comparison_is_semantically_limited": true
+        }
+      ],
+      "dropped_from_e1": {
+        "has_https": 1.0,
+        "has_www": 0.0
+      }
+    }
+  ],
+  "limitations": [
+    "Fixed diagnostic examples are not a representative validation sample.",
+    "A feature value difference alone does not establish that the difference caused E1's F1 decline.",
+    "subdomain_count and tld_length have definition differences and are listed separately from directly comparable changes.",
+    "No target URL was contacted; parsing and feature extraction were local only."
+  ]
+}

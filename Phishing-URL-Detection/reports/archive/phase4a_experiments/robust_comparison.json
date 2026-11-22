@@ -1,0 +1,141 @@
+{
+  "metadata": {
+    "timestamp_utc": "2026-11-22T08:11:24.209942+00:00",
+    "python": "3.14.7",
+    "package_versions": {
+      "numpy": "2.5.5",
+      "pandas": "3.1.1",
+      "scikit-learn": "1.9.1",
+      "joblib": "1.6.0",
+      "tldextract": "5.4.0"
+    },
+    "git_root": "C:\\Phishing-URL-Detection",
+    "project_dir": "C:\\Phishing-URL-Detection\\Phishing-URL-Detection",
+    "seed": 42,
+    "split": {
+      "outer_strategy": "domain",
+      "test_size": 0.2,
+      "random_state": 42,
+      "validation_size": 0.15,
+      "validation_random_state": 43
+    },
+    "random_forest": {
+      "n_estimators": 250,
+      "class_weight": "balanced_subsample",
+      "n_jobs": -1,
+      "random_state": 42
+    },
+    "transformer": {
+      "normalize": true,
+      "use_psl_subdomain": true,
+      "drop_columns": [
+        "has_https",
+        "has_www"
+      ]
+    }
+  },
+  "errors_and_warnings": [
+    {
+      "step": "fit_and_validation",
+      "status": "FAILED",
+      "exception": "TypeError('only integer scalar arrays can be converted to a scalar index')",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Phishing-URL-Detection\\Phishing-URL-Detection\\scripts\\train_robust.py\", line 403, in main\n    group: _metrics(model, manual_urls[mask], manual_y[mask])\n                           ~~~~~~~~~~~^^^^^^\nTypeError: only integer scalar arrays can be converted to a scalar index\n"
+    }
+  ],
+  "dataset": {
+    "raw_rows": 235795,
+    "rows_after_load_dataset": 235370,
+    "audit_counters": {
+      "rows_input": 235795,
+      "url_column": "URL",
+      "label_column": "label",
+      "missing_url": 0,
+      "empty_url": 0,
+      "whitespace_url": 0,
+      "malformed_url": 0,
+      "missing_scheme_url": 0,
+      "unicode_url": 2,
+      "missing_label": 0,
+      "duplicate_url_groups": 425,
+      "duplicate_excess_rows": 425,
+      "conflicting_url_groups": 0,
+      "conflicting_url_rows": 0,
+      "rows_after_processing": 235370,
+      "label_distribution": {
+        "Legitimate": 134850,
+        "Phishing": 100520
+      }
+    },
+    "label_counts": {
+      "Legitimate": 134850,
+      "Phishing": 100520
+    },
+    "split_sizes": {
+      "train": 188212,
+      "fit": 160009,
+      "validation": 28203,
+      "test": 47158
+    },
+    "registered_domains": {
+      "train": 140407,
+      "fit": 119345,
+      "validation": 21062,
+      "test": 35102
+    },
+    "domain_overlap": {
+      "train_test": 0,
+      "fit_validation": 0,
+      "validation_test": 0
+    }
+  },
+  "manual_check": {
+    "n": 25,
+    "class_counts": {
+      "Legitimate": 20,
+      "Phishing": 5
+    },
+    "exact_url_overlap_with_phiusiil": 0,
+    "registered_domain_overlap_by_split": {
+      "fit": 1,
+      "validation": 0,
+      "test": 2
+    },
+    "overlapping_domains": [
+      "google.com",
+      "python.org",
+      "stackoverflow.com"
+    ],
+    "unseen_domains": [
+      "apple-id-locked.support",
+      "facebook.com",
+      "github.com",
+      "hcmus.edu.vn",
+      "hcmut.edu.vn",
+      "ip:192.168.1.10",
+      "microsoft.com",
+      "paypa1-secure-verify.xyz",
+      "secure-update-account.top",
+      "shopee.vn",
+      "tuoitre.vn",
+      "uit.edu.vn",
+      "vietcombank-xacminh.info",
+      "vietcombank.com.vn",
+      "vnexpress.net",
+      "wikipedia.org",
+      "youtube.com"
+    ]
+  },
+  "external_sources": {
+    "malicious_phish": {
+      "exists": false,
+      "status": "NOT AVAILABLE",
+      "reason": "source file absent; no download attempted"
+    },
+    "tranco": {
+      "exists": false,
+      "status": "NOT AVAILABLE",
+      "reason": "source file absent; no download attempted"
+    }
+  },
+  "status": "FAILED"
+}

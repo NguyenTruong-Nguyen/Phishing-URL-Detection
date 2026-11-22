@@ -4,17 +4,20 @@ from __future__ import annotations
 import argparse
 import os
 import time
+import warnings
+from functools import lru_cache
+from pathlib import Path
 
 import joblib
+import sklearn
 
-from src.feature_extraction import extract_features_batch
 from src.preprocessing import inspect_url
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
 DEFAULT_CANDIDATES = [
-    "models/final_model.joblib",
-    "models/model_v0.joblib",
-    "models/logistic_regression.joblib",
-    "models/tfidf_linear_svm.joblib",
+    str(PROJECT_ROOT / "models" / name)
+    for name in ("model_v0.joblib",)
 ]
 
 
@@ -29,12 +32,25 @@ def find_model_path(path: str | None = None) -> str:
     raise FileNotFoundError("No model found. Train one first; see README.md.")
 
 
-def load_model(path: str | None = None) -> dict:
-    """Load a model artifact once for single or batch inference."""
-    artifact = joblib.load(find_model_path(path))
+@lru_cache(maxsize=4)
+def _load_cached(resolved_path: str) -> dict:
+    artifact = joblib.load(resolved_path)
     if not isinstance(artifact, dict) or "model" not in artifact or "model_type" not in artifact:
         raise ValueError("Model artifact has an unsupported structure.")
+
+    saved = artifact.get("library_versions", {}).get("scikit_learn")
+
+    if saved and saved != sklearn.__version__:
+        warnings.warn(
+            f"Model trained with scikit-learn {saved}, running {sklearn.__version__}."
+        )
+
     return artifact
+
+
+def load_model(path: str | None = None) -> dict:
+    """Load a model artifact (cached per resolved path)."""
+    return _load_cached(find_model_path(path))
 
 
 def _prepare_input(url: str, index: int) -> str:
@@ -57,11 +73,8 @@ def predict_urls(urls, model_path: str | None = None) -> list[dict]:
     artifact = load_model(model_path)
     model = artifact["model"]
     model_type = artifact["model_type"]
-    if model_type in {"raw_url_features", "url_text"}:
+    if model_type == "raw_url_features":
         X = urls
-    elif model_type == "url_features":
-        X = extract_features_batch(urls)
-        X = X.reindex(columns=artifact.get("feature_columns", X.columns), fill_value=0)
     else:
         raise ValueError(f"Unsupported model_type: {model_type}")
 

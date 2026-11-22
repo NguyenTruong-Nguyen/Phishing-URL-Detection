@@ -1,1 +1,24 @@
+﻿# Python environments
+.venv/
+.venv-1/
+venv/
+venv-1/
+
+# Dataset files
 Phishing-URL-Detection/data/raw/*.csv
+Phishing-URL-Detection/data/external/*.csv
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Testing
+.pytest_cache/
+.pytest-tmp/
+
+# Environment variables
+.env
+.env.*
+
+# Jupyter
+.ipynb_checkpoints/

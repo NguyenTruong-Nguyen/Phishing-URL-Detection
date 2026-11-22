@@ -1,0 +1,33 @@
+{
+  "rows": 235370,
+  "label_distribution": {
+    "Legitimate": 134850,
+    "Phishing": 100520
+  },
+  "by_label": {
+    "Legitimate": {
+      "rows": 134850,
+      "url_length_mean": 27.228609566184648,
+      "url_length_median": 27.0,
+      "share_https": 1.0,
+      "share_www": 1.0,
+      "share_has_path": 0.0,
+      "share_has_query": 0.0,
+      "share_bare_homepage": 1.0,
+      "share_ip_hostname": 0.0,
+      "digit_ratio_mean": 0.002029545874191935
+    },
+    "Phishing": {
+      "rows": 100520,
+      "url_length_mean": 46.22143851969757,
+      "url_length_median": 34.0,
+      "share_https": 0.48632113012335854,
+      "share_www": 0.41502188619180264,
+      "share_has_path": 0.2714285714285714,
+      "share_has_query": 0.06039594110624751,
+      "share_bare_homepage": 0.7183446080382013,
+      "share_ip_hostname": 0.006028651014723438,
+      "digit_ratio_mean": 0.06350863323387908
+    }
+  }
+}
