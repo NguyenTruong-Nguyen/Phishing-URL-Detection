@@ -7,6 +7,7 @@ venv-1/
 # Dataset files
 Phishing-URL-Detection/data/raw/*.csv
 Phishing-URL-Detection/data/external/*.csv
+Phishing-URL-Detection/data/partitions/
 
 # Python cache
 __pycache__/

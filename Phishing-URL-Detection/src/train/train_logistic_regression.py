@@ -7,11 +7,16 @@ from src.models.logistic_regression import build_pipeline
 from src.train._common import add_training_args, train_and_save
 
 
-def main():
+def build_parser() -> argparse.ArgumentParser:
     parser = add_training_args(
-        argparse.ArgumentParser(), "models/logistic_regression.joblib"
+        argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter),
+        "models/logistic_regression.joblib",
     )
-    args = parser.parse_args()
+    return parser
+
+
+def main(argv: list[str] | None = None):
+    args = build_parser().parse_args(argv)
     print(train_and_save(build_pipeline(args.random_state), "logistic_regression", args))
 
 
